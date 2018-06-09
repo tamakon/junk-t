@@ -65,3 +65,7 @@ typings/
 
 # Serverless directories
 .serverless
+
+# react-static
+dist/
+tmp/
