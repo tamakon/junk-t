@@ -12,22 +12,12 @@ export default {
         component: 'src/containers/Home',
       },
       {
-        path: '/about',
-        component: 'src/containers/About',
+        path: '/contact',
+        component: 'src/containers/Contact',
       },
       {
-        path: '/blog',
-        component: 'src/containers/Blog',
-        getData: () => ({
-          posts,
-        }),
-        children: posts.map(post => ({
-          path: `/post/${post.id}`,
-          component: 'src/containers/Post',
-          getData: () => ({
-            post,
-          }),
-        })),
+        path: '/profile',
+        component: 'src/containers/ProfileList',
       },
       {
         is404: true,
