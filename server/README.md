@@ -23,3 +23,8 @@ cd junk-t
 docker build -t junk-t-image . && docker run --name junk-t --detach -p 8000:8000 junk-t-image 
 ```
 If success, you can access via http:localhost:8000.
+
+You can see log by using below command.
+```
+docker logs -f junk-t
+``` 
