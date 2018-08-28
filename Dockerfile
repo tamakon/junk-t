@@ -2,18 +2,21 @@
 FROM python:3.7.0-stretch
 
 # Install requred command
+RUN apt-get update
+RUN apt-get install --assume-yes nginx
 RUN pip install pipenv
 
-# Create use for web application
-RUN useradd --create-home --shell /bin/bash junk-t
-USER junk-t
-
 # Deploy web application
+RUN mkdir /junk-t
+COPY ./server /junk-t/server
+COPY ./client /junk-t/client
+WORKDIR /junk-t/server
 ENV DJANGO_SETTINGS_MODULE server.settings.localhost
-COPY --chown=junk-t:junk-t ./server /home/junk-t/server
-COPY --chown=junk-t:junk-t ./client /home/junk-t/client
-WORKDIR /home/junk-t/server
 RUN pipenv install
 RUN pipenv run python manage.py migrate
-CMD pipenv run uwsgi --http 0.0.0.0:8000 --module server.wsgi
+RUN pipenv run python manage.py migrate
 EXPOSE 8000
+
+# Start web server and web application
+CMD nginx -c /junk-t/server/nginx.conf; \
+    pipenv run uwsgi --socket :8001 --module server.wsgi
