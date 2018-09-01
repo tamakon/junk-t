@@ -14,17 +14,17 @@ pipenv shell
 python manage.py migrate
 python manage.py runserver
 ```
-If success, you can access via http:localhost:8000.
+If success, you can access via http://localhost:8000.
 
 # How to start in the local environment (Docker)
 Just execute below command. This way assumes Docker has already installed.
 ```
 cd junk-t
-docker build -t junk-t-image . && docker run --name junk-t --detach -p 8000:8000 junk-t-image 
+docker-compose up 
 ```
-If success, you can access via http:localhost:8000.
+If success, you can access via http://localhost:8000.
 
 You can see log by using below command.
 ```
-docker logs -f junk-t
+docker-compose logs --follow
 ``` 
