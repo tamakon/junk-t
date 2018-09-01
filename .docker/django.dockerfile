@@ -2,8 +2,6 @@
 FROM python:3.7.0-stretch
 
 # Install requred command
-RUN apt-get update
-RUN apt-get install --assume-yes nginx
 RUN pip install pipenv
 
 # Deploy web application
@@ -14,9 +12,7 @@ WORKDIR /junk-t/server
 ENV DJANGO_SETTINGS_MODULE server.settings.localhost
 RUN pipenv install
 RUN pipenv run python manage.py migrate
-RUN pipenv run python manage.py migrate
-EXPOSE 8000
 
-# Start web server and web application
-CMD nginx -c /junk-t/server/nginx.conf; \
-    pipenv run uwsgi --socket :8001 --module server.wsgi
+# Start web application
+CMD pipenv run uwsgi --socket :8001 --module server.wsgi
+EXPOSE 8001

@@ -1,0 +1,14 @@
+version: "3"
+services:
+  nginx:
+    build:
+      context: ./
+      dockerfile: .docker/nginx.dockerfile
+    ports:
+      - "8000:8000"
+  django:
+    build:
+      context: ./
+      dockerfile: .docker/django.dockerfile
+    ports:
+      - "8001:8001"
