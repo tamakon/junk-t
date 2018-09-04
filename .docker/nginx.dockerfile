@@ -6,4 +6,3 @@ COPY ./.docker/conf/nginx/nginx.conf /etc/nginx/conf.d/junk-t/
 
 # Start web server
 CMD ["nginx", "-c", "/etc/nginx/conf.d/junk-t/nginx.conf", "-g", "daemon off;"]
-EXPOSE 8000

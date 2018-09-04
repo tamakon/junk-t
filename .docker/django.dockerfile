@@ -15,4 +15,3 @@ RUN pipenv run python manage.py migrate
 
 # Start web application
 CMD pipenv run uwsgi --socket :8001 --module server.wsgi
-EXPOSE 8001
