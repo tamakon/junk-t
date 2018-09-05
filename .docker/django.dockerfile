@@ -4,11 +4,14 @@ FROM python:3.7.0-stretch
 # Install requred command
 RUN pip install pipenv
 
+# Create user
+RUN useradd --create-home --shell /bin/bash --password junk-t-passwd junk-t
+USER junk-t
+
 # Deploy web application
-RUN mkdir /junk-t
-COPY ./server /junk-t/server
-COPY ./client /junk-t/client
-WORKDIR /junk-t/server
+COPY --chown=junk-t ./server /home/junk-t/server
+COPY --chown=junk-t ./client /home/junk-t/client
+WORKDIR /home/junk-t/server
 ENV DJANGO_SETTINGS_MODULE server.settings.localhost
 RUN pipenv install
 RUN pipenv run python manage.py migrate
