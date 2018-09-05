@@ -6,14 +6,20 @@ services:
       dockerfile: .docker/nginx.dockerfile
     ports:
       - "8000:8000"
+    volumes:
+      - static:/home/junk-t/static:ro
     networks:
       - host-1
   django:
     build:
       context: ./
       dockerfile: .docker/django.dockerfile
+    volumes:
+      - static:/home/junk-t/static
     networks:
       - host-1
+volumes:
+  static:
 networks:
   host-1:
     driver: bridge

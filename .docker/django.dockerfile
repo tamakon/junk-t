@@ -8,6 +8,10 @@ RUN pip install pipenv
 RUN useradd --create-home --shell /bin/bash --password junk-t-passwd junk-t
 USER junk-t
 
+# Make static directory for volume
+RUN mkdir -p /home/junk-t/static
+RUN echo "this is staticfile." >> /home/junk-t/static/test.txt
+
 # Deploy web application
 COPY --chown=junk-t ./server /home/junk-t/server
 COPY --chown=junk-t ./client /home/junk-t/client
