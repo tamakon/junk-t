@@ -20,7 +20,7 @@ If success, you can access via http://localhost:8000.
 Just execute below command. This way assumes Docker has already installed.
 ```
 cd junk-t
-docker-compose up 
+docker-compose up --detach 
 ```
 If success, you can access via http://localhost:8000.
 
