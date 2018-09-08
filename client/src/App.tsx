@@ -1,19 +1,30 @@
 import * as React from 'react';
 import './App.css';
 
-import logo from './logo.svg';
-
 class App extends React.Component {
   public render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.tsx</code> and save to reload.
-        </p>
+        <header className="App-header" />
+          <h1>JUNK-TION!!</h1>
+          <div>2007年に小田和正、オフコースのトリビュートバンドとして活動を開始する。鎮目（しずめ）のハイトーンボイスが話題となり、各メディア、イベントに出演。2011年に入り、オリジナル曲の作成も開始、現在はトリビュートにメロディアスなオリジナル曲を取り混ぜたステージを提供している。</div>
+          <p>バンド経歴：</p>
+          <p>２００７年 小田和正、オフコースのトリビュートバンドとして活動を開始</p>
+          <p>２００７年 ＮＨＫ 熱血おやじバトル</p>
+          <p>フジテレビ ものまね紅白歌合戦　（シズメのみ）</p>
+          <p>２００８年 日本テレビ 口コミジョニー（シズメのみ）</p>
+          <p>２００９年 ＮＨＫＢＳ２ 全国バンド自慢</p>
+          <p>２０１０年 テレビ東京 日経大人のバンド大賞　（オリジナル曲）</p>
+          <p>２０１１年 ＴＢＳ おもろげ動画ショー　（シズメのみ）</p>
+          <p>フジテレビ クイズヘキサゴン　（シズメのみ）</p>
+          <p>日本テレビ スッキリ</p>
+          <p>２０１２年 テレビ朝日 ＭｕｓｉｃるＴＶ（オリジナル曲）</p>
+          <p>日本テレビ 世界一のショータイム</p>
+          <p>２０１３年 日本テレビ 世界一のショータイム</p>
+          <p>その他、都内、神奈川、千葉などのイベントに出演。</p>
+
+          <p>２０１１年〜２０１２年、東京ＦＭ系列のミュージックバードのＣＦＭ向けラジオ番組の
+          パーソナリティを務める。同年にラジオ日本の番組もワンクール担当。同年２枚のオリジナルマキシシングルを発売。</p>
       </div>
     );
   }
