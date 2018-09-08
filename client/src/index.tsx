@@ -5,6 +5,8 @@ import { Redirect, Route } from 'react-router';
 import { HashRouter } from "react-router-dom"
 import App from './App';
 import Contact from './Contact';
+import Footer from './Footer';
+import Header from './Header';
 import './index.css';
 import Profile from './Profile';
 import registerServiceWorker from './registerServiceWorker';
@@ -14,10 +16,12 @@ ReactDOM.render(
   <Provider store={store}>
     <HashRouter>
       <div>
+        <Header />
         <Route exact={true} path="/home" component={App} />
         <Route exact={true} path="/contact" component={Contact} />
         <Route exact={true} path="/profile" component={Profile} />
         <Redirect exact={true} from='/' to='/home'/>
+        <Footer />
       </div>
     </HashRouter>
   </Provider>,

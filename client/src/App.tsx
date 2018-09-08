@@ -5,7 +5,6 @@ class App extends React.Component {
   public render() {
     return (
       <div className="App">
-        <header className="App-header" />
           <h1>JUNK-TION!!</h1>
           <div>2007年に小田和正、オフコースのトリビュートバンドとして活動を開始する。鎮目（しずめ）のハイトーンボイスが話題となり、各メディア、イベントに出演。2011年に入り、オリジナル曲の作成も開始、現在はトリビュートにメロディアスなオリジナル曲を取り混ぜたステージを提供している。</div>
           <p>バンド経歴：</p>
