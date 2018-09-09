@@ -1,0 +1,19 @@
+version: "3"
+services:
+  nginx:
+    build:
+      context: ./
+      dockerfile: .docker/nginx.dockerfile
+    ports:
+      - "8000:8000"
+    networks:
+      - host-1
+  django:
+    build:
+      context: ./
+      dockerfile: .docker/django.dockerfile
+    networks:
+      - host-1
+networks:
+  host-1:
+    driver: bridge
