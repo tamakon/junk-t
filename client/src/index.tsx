@@ -15,7 +15,7 @@ import store from './store';
 ReactDOM.render(
   <Provider store={store}>
     <HashRouter>
-      <div>
+      <div className="container container-fluid">
         <Header />
         <Switch>
           <Route exact={true} path="/home" component={App} />

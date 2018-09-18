@@ -7,6 +7,7 @@ class Header extends React.Component {
   public render() {
     return (
         <header>
+          <img src="https://via.placeholder.com/350x100" />
           <Navbar>
             <Navbar.Header>
               <Navbar.Brand>
