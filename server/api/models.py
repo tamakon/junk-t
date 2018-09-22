@@ -1,13 +1,13 @@
 from django.db import models
 
 
-def image_file_path(instance, _):
+def image_file_path(instance, filename):
     """
     :param instance: An instance of the model where the FileField is defined.
-    :param _: uploaded file name. but it is not used.
+    :param filename: uploaded file name.
     :return: path that image file will be stored.
     """
-    return "api/resource/images/{0}".format(instance.tag)
+    return "api/resource/images/{0}_{1}".format(instance.tag, filename)
 
 
 class Image(models.Model):

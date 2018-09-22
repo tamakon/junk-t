@@ -9,4 +9,5 @@ router = routers.DefaultRouter()
 router.register('images', views.ImageViewSet)
 urlpatterns = [
     url('', include(router.urls)),
+    url(r'resource/images/(?P<tag>.+)$', views.image_content)
 ]
