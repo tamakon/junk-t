@@ -17,7 +17,8 @@ python manage.py runserver
 If success, you can access via http://localhost:8000.
 
 # How to start in the local environment (Docker)
-Just execute below command. This way assumes Docker has already installed.
+Just execute below command. This way assumes Docker has already installed. 
+If building is not needed, omit `--build` option.
 ```
 cd junk-t
 docker-compose up --detach --build 
