@@ -10,7 +10,7 @@ import Header from './Header';
 import './index.css';
 import Profile from './Profile';
 import registerServiceWorker from './registerServiceWorker';
-import store from './store';
+import { store } from './store';
 
 ReactDOM.render(
   <Provider store={store}>
