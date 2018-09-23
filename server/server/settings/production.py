@@ -10,3 +10,11 @@ SESSION_COOKIE_SECURE = True
 
 MEDIA_ROOT = os.path.expanduser("~/resource/")
 MEDIA_URL = ''
+
+# TODO 実際はMySQLを使う
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(os.path.expanduser("~/"), 'db.sqlite3'),
+    }
+}
