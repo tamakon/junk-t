@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 import { IImageEntity } from '../model';
-import { membersReducer } from './images';
+import { imagesReducer } from './images';
 
 export interface IState {
-  members: IImageEntity[];
+  images: IImageEntity[];
 };
 
 export const state = combineReducers<IState>({
-  members: membersReducer,
+  images: imagesReducer,
 });
