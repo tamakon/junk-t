@@ -10,3 +10,6 @@ SESSION_COOKIE_SECURE = False
 
 MEDIA_ROOT = BASE_DIR
 MEDIA_URL = ''
+
+# needed when running client as another server.
+CORS_ORIGIN_ALLOW_ALL = True
