@@ -6,7 +6,7 @@ from api import views
 
 app_name = 'api'
 router = routers.DefaultRouter()
-router.register('images', views.ImageViewSet)
+router.register('images', views.ImageViewSet, base_name="image")
 urlpatterns = [
     url('', include(router.urls)),
 ]
