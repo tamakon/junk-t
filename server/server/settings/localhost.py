@@ -20,3 +20,6 @@ DATABASES = {
         'NAME': os.path.join(os.path.dirname(BASE_DIR), 'db.sqlite3'),
     }
 }
+
+# needed when running client as another server.
+CORS_ORIGIN_ALLOW_ALL = True

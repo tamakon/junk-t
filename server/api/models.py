@@ -16,3 +16,7 @@ class Image(models.Model):
     "key of image file"
     resource = models.ImageField(upload_to=image_file_path)
     "image file itself"
+    create_at = models.DateTimeField(auto_now_add=True)
+    "date and minute that model has created"
+    update_at = models.DateTimeField(auto_now=True)
+    "date and minute that model has last updated"
