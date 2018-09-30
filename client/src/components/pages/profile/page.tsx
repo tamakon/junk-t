@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
 
-class Profile extends React.Component {
+export class ProfilePage extends React.Component {
   public render() {
     return (
       <div className="App">
@@ -26,5 +26,3 @@ class Profile extends React.Component {
     );
   }
 }
-
-export default Profile;
