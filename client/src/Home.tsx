@@ -67,6 +67,14 @@ class Home extends React.Component {
             </Table>
             <p className="text-left">２０１１年〜２０１２年、東京ＦＭ系列のミュージックバードのＣＦＭ向けラジオ番組のパーソナリティを務める。同年にラジオ日本の番組もワンクール担当。同年２枚のオリジナルマキシシングルを発売。</p>
           </div>
+          <iframe
+            src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fjunktion2007%2F&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
+            width="340"
+            height="500"
+            style={{border:'none',overflow:'hidden'}}
+            scrolling="no"
+            frameBorder="0"
+            allowTransparency={true} />
       </div>
     );
   }
