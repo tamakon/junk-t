@@ -9,7 +9,6 @@ class Profile extends React.Component {
         <div className="text-left">
           <h3>メンバー</h3>
           <ListGroup>
-            <ListGroupItem>Vo.              <a href="http://junk-tion.jp/wp-content/uploads/2016/05/shizumemasahiro.pdf" target="_blank">鎮目政宏（シズメマサヒロ）</a></ListGroupItem>
             <ListGroupItem><p>Vo.              <a href="http://junk-tion.jp/wp-content/uploads/2016/05/shizumemasahiro.pdf" target="_blank">鎮目政宏（シズメマサヒロ）</a></p></ListGroupItem>
             <ListGroupItem><p>Gt.              <a href="http://junk-tion.jp/wp-content/uploads/2016/05/uekihisashi.pdf" target="_blank">植木栄（ウエキヒサシ）</a></p></ListGroupItem>
             <ListGroupItem><p>Dr.              西基容貴（ニシキヨタカ）</p></ListGroupItem>
