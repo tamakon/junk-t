@@ -1,14 +1,11 @@
-import {Action, combineReducers, createStore} from 'redux'
-import counter, {CounterActions, ICounterState} from './counter/module'
+import { applyMiddleware, compose, createStore, Store } from 'redux';
 
-export default createStore(
-  combineReducers({
-    counter
-  })
-)
+import reduxThunk from 'redux-thunk';
+import { IState, state } from './reducers';
 
-export interface IReduxState {
-  counter : ICounterState
-}
-
-export type ReduxAction = CounterActions | Action
+export const store: Store<IState> = createStore(
+  state,
+  compose(
+    applyMiddleware(reduxThunk),
+  )
+);
