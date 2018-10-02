@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { Panel, Table } from 'react-bootstrap';
-import './App.css';
 
-class Home extends React.Component {
+export class HomePage extends React.Component {
   public render() {
     return (
       <div className="App">
@@ -71,5 +70,3 @@ class Home extends React.Component {
     );
   }
 }
-
-export default Home;
