@@ -18,7 +18,7 @@ export class AppRootPage extends React.Component<IProps, {}> {
   }
 
   public render() {
-    const headerImage = _.find(this.props.images, (image: IImageEntity) => image.tag === 'top');
+    const headerImage = _.find(this.props.images, {tag: 'top'});
     return (
       <HashRouter>
       <div className="container container-fluid">

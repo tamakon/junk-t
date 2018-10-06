@@ -10,11 +10,10 @@ interface IProps {
 
 class Header extends React.Component<IProps, any> {
   public render() {
-    const image: IImageEntity = this.props.image ? this.props.image : { tag: "", url: "", update_at: "" };
-    const src = `${image.url}?update_at=${image.update_at}`;
+    const imgTag = this.renderHeroImg(this.props.image);
     return (
         <header>
-          <img src={src} />
+          {imgTag}
           <Navbar>
             <Navbar.Header>
               <Navbar.Brand>
@@ -32,6 +31,15 @@ class Header extends React.Component<IProps, any> {
           </Navbar>
         </header>
     );
+  }
+
+  private renderHeroImg(image: IImageEntity | undefined) {
+    if (image) {
+      const src = `${image.url}?update_at=${image.update_at}`;
+      return <img src={src} />
+    } else {
+      return null;
+    }
   }
 }
 
