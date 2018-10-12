@@ -10,7 +10,6 @@ USER junk-t
 
 # Make static directory for volume
 RUN mkdir -p /home/junk-t/static
-RUN echo "this is staticfile." >> /home/junk-t/static/test.txt
 
 # Deploy web application
 COPY --chown=junk-t ./server /home/junk-t/server
@@ -20,6 +19,7 @@ WORKDIR /home/junk-t/server
 ENV DJANGO_SETTINGS_MODULE server.settings.localhost
 RUN pipenv install
 RUN pipenv run python manage.py migrate
+RUN pipenv run python manage.py collectstatic
 
 # Start web application
 CMD pipenv run uwsgi uwsgi/uwsgi.ini
