@@ -1,19 +1,25 @@
 import { IImageEntity } from '../../model';
 
-let cache: IImageEntity[] = [];
+let cache: IImageEntity[];
 
-const fetchImages = (): Promise<IImageEntity[]> => {
-  // tslint:disable-next-line
-  cache = [
-    {
-      tag: 'top',
-      url: 'https://via.placeholder.com/350x100',
-      update_at: "2018-09-16T19:48:20.928111+09:00"
-    },
-  ];
-  return Promise.resolve(cache);
+const fetchMembersAsync = (): Promise<IImageEntity[]> => {
+  const membersURL = `http://localhost:8000/api/images/`;
+
+  return fetch(membersURL)
+    .then((response) => response.json())
+    .then((data: IImageEntity[]) => {
+      cache = data;
+      return data;
+    });
 };
 
+const fetchImages = (): Promise<IImageEntity[]> => {
+  if (cache) {
+    return Promise.resolve(cache);
+  } else {
+    return fetchMembersAsync();
+  }
+};
 
 export const imageAPI = {
   fetchImages,
