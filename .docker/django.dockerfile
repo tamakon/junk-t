@@ -19,6 +19,7 @@ WORKDIR /home/junk-t/server
 ENV DJANGO_SETTINGS_MODULE server.settings.localhost
 RUN pipenv install
 RUN pipenv run python manage.py migrate
+RUN pipenv run python manage.py loaddata superuser.json
 RUN pipenv run python manage.py collectstatic
 
 # Start web application
