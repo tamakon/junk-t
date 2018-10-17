@@ -23,3 +23,7 @@ DATABASES = {
 
 # needed when running client as another server.
 CORS_ORIGIN_ALLOW_ALL = True
+
+FIXTURE_DIRS = [
+    os.path.join(BASE_DIR, 'fixtures/localhost')
+]
