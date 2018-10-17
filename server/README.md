@@ -16,6 +16,7 @@ brew services start mysql
 ```
 Next, creating database and user along django's `DATABASE` setting.
 ```
+mysql -u root -p
 mysql > create user 'junk-t'@'localhost' identified by 'junk-t-pass';
 mysql > grant all privileges on *.* to 'junk-t'@'localhost';
 mysql > create database junktion;
