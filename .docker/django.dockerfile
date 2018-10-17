@@ -15,12 +15,13 @@ RUN mkdir -p /home/junk-t/static
 COPY --chown=junk-t ./server /home/junk-t/server
 COPY --chown=junk-t ./client /home/junk-t/client
 COPY --chown=junk-t ./.docker/conf/uwsgi/ /home/junk-t/server/uwsgi
+COPY --chown=junk-t ./.docker/django-entrypoint.sh /home/junk-t/server/
+COPY --chown=junk-t ./.docker/wait-for-it.sh /home/junk-t/server/
 WORKDIR /home/junk-t/server
-ENV DJANGO_SETTINGS_MODULE server.settings.localhost
+RUN chmod u+x ./django-entrypoint.sh
+RUN chmod u+x ./wait-for-it.sh
+ENV DJANGO_SETTINGS_MODULE server.settings.localhost-docker
 RUN pipenv install
-RUN pipenv run python manage.py migrate
-RUN pipenv run python manage.py loaddata superuser.json
-RUN pipenv run python manage.py collectstatic
 
-# Start web application
-CMD pipenv run uwsgi uwsgi/uwsgi.ini
+# Start web application after db server has started
+CMD ./wait-for-it.sh mysql:3306 -- ./django-entrypoint.sh
