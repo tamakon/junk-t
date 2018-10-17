@@ -20,7 +20,8 @@ DATABASES = {
         'NAME': 'junktion',
         'USER': 'junk-t',
         'PASSWORD': 'junk-t-pass',
-        'HOST': 'localhost'
+        'HOST': 'localhost',
+        'PORT': '3306'
     }
 }
 
