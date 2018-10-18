@@ -10,3 +10,6 @@ DATABASES = {
         'PORT': '3306'
     }
 }
+
+STATIC_URL = '/srv/static/'
+STATIC_ROOT = os.path.expanduser("~/static/")

@@ -9,7 +9,7 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - static:/home/junk-t/static:ro
+      - server-static:/home/junk-t/static:ro
     networks:
       - host-1
   django:
@@ -19,7 +19,8 @@ services:
     depends_on:
       - mysql
     volumes:
-      - static:/home/junk-t/static
+      - server-src:/home/junk-t/server:nocopy # nocopy is important
+      - server-static:/home/junk-t/static
     networks:
       - host-1
   mysql:
@@ -32,7 +33,9 @@ services:
     networks:
     - host-1
 volumes:
-  static:
+  server-src:
+    external: true
+  server-static:
 networks:
   host-1:
     driver: bridge

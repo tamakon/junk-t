@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo "Install python packages"
+pipenv install
+
 echo "Collect static files"
 pipenv run python manage.py collectstatic --noinput
 
@@ -10,4 +13,4 @@ echo "Apply database seed"
 pipenv run python manage.py loaddata superuser.json
 
 echo "Starting server"
-pipenv run uwsgi uwsgi/uwsgi.ini
+pipenv run uwsgi ~/.docker/conf/uwsgi/uwsgi.ini
