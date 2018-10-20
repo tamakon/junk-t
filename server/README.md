@@ -31,20 +31,28 @@ python manage.py runserver
 If success, you can access via http://localhost:8000.
 
 # How to start in the local environment (Docker)
-Just execute below command. This way assumes Docker has already installed. 
+This way assumes Docker has already installed. If do not, please install it.  
+
+And this way uses docker-sync for development productivity. 
+So you need to install `docker-sync` and need to install `unison` used as sync strategy too.
+About way to install, please see [document of docker-sync installation](https://github.com/EugenMayer/docker-sync/wiki/1.-Installation).
+
+Then execute below command. 
 If building is not needed, omit `--build` option.
 ```
 cd junk-t
+docker-sync start
 docker-compose up --detach --build 
 ```
-If success, you can access via http://localhost:8000.
+If success, you can access via http://localhost:8000/srv/.
 
 You can see log by using below command.
 ```
 docker-compose logs --follow
 ```
 
-When you want to down docker-compose, just do below.
+When you want to down docker-compose and docker-sync, just do below.  
 ```
 docker-compose down
-``` 
+docker-sync stop
+```
