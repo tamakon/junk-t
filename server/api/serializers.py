@@ -14,4 +14,5 @@ class ImageSerializer(serializers.HyperlinkedModelSerializer):
         request = self.context["request"]
         scheme = request.scheme
         host = request.get_host()
-        return "{0}://{1}/api/resource/images/{2}".format(scheme, host, model.tag)
+        script_name = request.META.get('SCRIPT_NAME')
+        return "{0}://{1}{2}/api/resource/images/{3}".format(scheme, host, script_name, model.tag)
