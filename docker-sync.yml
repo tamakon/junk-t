@@ -3,6 +3,13 @@ version: "2"
 options:
   verbose: true
 syncs:
+  client-src:
+    notify_terminal: true
+    src: './client'
+    sync_excludes: ['.gitignore', '.idea']
+    sync_excludes_type: 'Name'
+    sync_userid: '1001'
+    sync_strategy: 'unison'
   server-src:
     notify_terminal: true
     src: './server'

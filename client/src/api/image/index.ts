@@ -3,7 +3,7 @@ import { IImageEntity } from '../../model';
 let cache: IImageEntity[];
 
 const fetchMembersAsync = (): Promise<IImageEntity[]> => {
-  const membersURL = `http://localhost:8000/api/images/`;
+  const membersURL = `http://localhost:8000/srv/api/images/`;
 
   return fetch(membersURL)
     .then((response) => response.json())

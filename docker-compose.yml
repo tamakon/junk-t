@@ -6,10 +6,19 @@ services:
       dockerfile: .docker/nginx.dockerfile
     depends_on:
       - django
+      - react
     ports:
       - "8000:8000"
     volumes:
       - server-static:/home/junk-t/static:ro
+    networks:
+      - host-1
+  react:
+    build:
+      context: ./
+      dockerfile: .docker/react.dockerfile
+    volumes:
+      - client-src:/home/junk-t/client:nocopy # nocopy is important
     networks:
       - host-1
   django:
@@ -33,6 +42,8 @@ services:
     networks:
     - host-1
 volumes:
+  client-src:
+    external: true
   server-src:
     external: true
   server-static:
