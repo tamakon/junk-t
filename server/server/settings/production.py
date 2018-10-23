@@ -18,3 +18,7 @@ DATABASES = {
         'NAME': os.path.join(os.path.expanduser("~/"), 'db.sqlite3'),
     }
 }
+
+FIXTURE_DIR = [
+    os.path.join(BASE_DIR, 'fixtures/production')
+]

@@ -16,10 +16,18 @@ MEDIA_URL = ''
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(os.path.dirname(BASE_DIR), 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'junktion',
+        'USER': 'junk-t',
+        'PASSWORD': 'junk-t-pass',
+        'HOST': 'localhost',
+        'PORT': '3306'
     }
 }
 
 # needed when running client as another server.
 CORS_ORIGIN_ALLOW_ALL = True
+
+FIXTURE_DIRS = [
+    os.path.join(BASE_DIR, 'fixtures/localhost')
+]

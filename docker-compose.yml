@@ -4,22 +4,38 @@ services:
     build:
       context: ./
       dockerfile: .docker/nginx.dockerfile
+    depends_on:
+      - django
     ports:
       - "8000:8000"
     volumes:
-      - static:/home/junk-t/static:ro
+      - server-static:/home/junk-t/static:ro
     networks:
       - host-1
   django:
     build:
       context: ./
       dockerfile: .docker/django.dockerfile
+    depends_on:
+      - mysql
     volumes:
-      - static:/home/junk-t/static
+      - server-src:/home/junk-t/server:nocopy # nocopy is important
+      - server-static:/home/junk-t/static
     networks:
       - host-1
+  mysql:
+    image: mysql:5.7.23
+    environment:
+      MYSQL_DATABASE: junktion
+      MYSQL_USER: junk-t
+      MYSQL_PASSWORD: junk-t-pass
+      MYSQL_ROOT_PASSWORD: root-pass
+    networks:
+    - host-1
 volumes:
-  static:
+  server-src:
+    external: true
+  server-static:
 networks:
   host-1:
     driver: bridge

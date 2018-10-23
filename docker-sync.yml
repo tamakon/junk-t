@@ -1,0 +1,12 @@
+version: "2"
+
+options:
+  verbose: true
+syncs:
+  server-src:
+    notify_terminal: true
+    src: './server'
+    sync_excludes: ['.gitignore', '.idea']
+    sync_excludes_type: 'Name'
+    sync_userid: '1000'
+    sync_strategy: 'unison'
