@@ -5,17 +5,17 @@ services:
       context: ./
       dockerfile: .docker/nginx.dockerfile
     depends_on:
-      - django
+      - application
     ports:
       - "8000:8000"
     volumes:
       - server-static:/home/junk-t/static:ro
     networks:
       - host-1
-  django:
+  application:
     build:
       context: ./
-      dockerfile: .docker/django.dockerfile
+      dockerfile: .docker/application.dockerfile
     depends_on:
       - mysql
     volumes:
