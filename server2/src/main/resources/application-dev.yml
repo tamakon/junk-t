@@ -1,4 +1,4 @@
 spring:
   datasource:
-    url: jdbc:sqlite:memory
-    driver-class-name: org.sqlite.JDBC
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
