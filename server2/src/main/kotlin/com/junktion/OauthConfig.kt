@@ -2,7 +2,7 @@ package com.junktion
 
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.authentication.AuthenticationManager
-import org.springframework.security.config.annotation.web.builders.HttpSecurity
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer
@@ -35,15 +35,10 @@ class AuthorizationServerConfig(
 	}
 }
 
+/**
+ * リソースの認可設定は[メソッド単位][https://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/#jc-method]で定義しています。
+ */
 @Configuration
 @EnableResourceServer
-class ResourceServerConfig: ResourceServerConfigurerAdapter() {
-
-	/**
-	 * apiはdefaultスコープを保持している場合のみアクセス可能。
-	 */
-	override fun configure(http: HttpSecurity) {
-		http.requestMatchers().antMatchers("/api/**").and()
-				.authorizeRequests().anyRequest().access("#oauth2.hasScope('default')")
-	}
-}
+@EnableGlobalMethodSecurity(prePostEnabled = true)
+class ResourceServerConfig: ResourceServerConfigurerAdapter()

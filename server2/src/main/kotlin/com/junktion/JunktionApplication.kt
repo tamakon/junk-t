@@ -28,8 +28,6 @@ fun main(args: Array<String>) {
 @Profile("dev")
 class SwaggerConfig
 
-
-
 @Controller
 @RequestMapping("/")
 class HomeController {
