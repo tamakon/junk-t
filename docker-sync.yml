@@ -5,7 +5,7 @@ options:
 syncs:
   server-src:
     notify_terminal: true
-    src: './server'
+    src: './server2'
     sync_excludes: ['.gitignore', '.idea']
     sync_excludes_type: 'Name'
     sync_userid: '1000'
