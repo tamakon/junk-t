@@ -1,17 +1,17 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-	id("org.springframework.boot") version "2.1.6.RELEASE"
-	id("io.spring.dependency-management") version "1.0.7.RELEASE"
-	kotlin("jvm") version "1.2.71"
-	kotlin("plugin.spring") version "1.2.71"
+	id("org.springframework.boot") version "2.1.7.RELEASE"
+	id("io.spring.dependency-management") version "1.0.8.RELEASE"
+	kotlin("jvm") version "1.3.41"
+	kotlin("plugin.spring") version "1.3.41"
 }
 
 group = "com"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 
-val developmentOnly by configurations.creating
+val developmentOnly: Configuration  by configurations.creating
 configurations {
 	runtimeClasspath {
 		extendsFrom(developmentOnly)
@@ -34,16 +34,30 @@ dependencies {
 	implementation("org.springframework.security.oauth:spring-security-oauth2:2.3.6.RELEASE")
 	implementation("org.flywaydb:flyway-core")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
-	developmentOnly("com.h2database:h2")
 	runtimeOnly("mysql:mysql-connector-java")
+	runtimeOnly("com.h2database:h2")
 	annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("org.springframework.boot:spring-boot-starter-test") {
+		exclude(module = "junit")
+		exclude(module = "mockito-core")
+	}
 	testImplementation("org.springframework.security:spring-security-test")
+	testImplementation("io.kotlintest:kotlintest-runner-junit5:3.3.3")
+	testImplementation("io.kotlintest:kotlintest-extensions-spring:3.3.3")
+	testImplementation("com.ninja-squad:springmockk:1.1.2")
+	testImplementation("org.junit.jupiter:junit-jupiter-api")
+	testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
 }
 
 tasks.withType<KotlinCompile> {
 	kotlinOptions {
 		freeCompilerArgs = listOf("-Xjsr305=strict")
-		jvmTarget = "1.8"
+		jvmTarget = java.sourceCompatibility.toString()
 	}
 }
+
+tasks.withType<Test> {
+	useJUnitPlatform()
+}
+
+apply(from = "integration-test.gradle.kts")
