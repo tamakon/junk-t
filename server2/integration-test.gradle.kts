@@ -1,9 +1,8 @@
 configure<SourceSetContainer> {
 	val main by getting
-	val test by getting
 	maybeCreate("integrationTest").apply {
-		compileClasspath += main.output + test.output
-		runtimeClasspath += main.output+ test.output
+		compileClasspath += main.output
+		runtimeClasspath += main.output
 		java {
 			srcDir("src/integration-test/kotlin")
 		}
