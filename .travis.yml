@@ -3,5 +3,7 @@ jdk:
   - openjdk8
 before_install:
   - cd server2
+install:
+  - ./gradlew assemble --console=plain
 script:
   - ./gradlew test --console=plain
