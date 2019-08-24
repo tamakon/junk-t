@@ -1,5 +1,6 @@
 package com.junktion
 
+import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.access.expression.method.MethodSecurityExpressionHandler
 import org.springframework.security.authentication.AuthenticationManager
@@ -13,12 +14,14 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer
 import org.springframework.security.oauth2.provider.expression.OAuth2MethodSecurityExpressionHandler
+import org.springframework.stereotype.Component
 
 
 @Configuration
 @EnableAuthorizationServer
 class AuthorizationServerConfig(
-		private val authenticationManager: AuthenticationManager
+		private val authenticationManager: AuthenticationManager,
+		private val oauth2ClientConfig: Oauth2ClientConfig
 ): AuthorizationServerConfigurerAdapter() {
 
 	/**
@@ -26,8 +29,8 @@ class AuthorizationServerConfig(
 	 */
 	override fun configure(clients: ClientDetailsServiceConfigurer) {
 		clients.inMemory()
-				.withClient("fooClientId")
-				.secret("{noop}secret")
+				.withClient(oauth2ClientConfig.clientId)
+				.secret("{noop}${oauth2ClientConfig.clientSecret}")
 				.authorizedGrantTypes("password")
 				.scopes("default")
 	}
@@ -59,4 +62,11 @@ class MethodSecurityConfig: GlobalMethodSecurityConfiguration() {
 	override fun createExpressionHandler(): MethodSecurityExpressionHandler {
 		return OAuth2MethodSecurityExpressionHandler()
 	}
+}
+
+@Component
+@ConfigurationProperties(prefix = "security.oauth2.client")
+class Oauth2ClientConfig {
+	lateinit var clientId: String
+	lateinit var clientSecret: String
 }
