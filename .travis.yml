@@ -4,4 +4,4 @@ jdk:
 before_install:
   - cd server2
 script:
-  - ./gradlew test
+  - ./gradlew test --console=plain
