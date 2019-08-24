@@ -1,4 +1,4 @@
-package com.junktion.api.v1.models.controllers
+package com.junktion.api.v1.models.image
 
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation

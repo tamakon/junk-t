@@ -1,11 +1,11 @@
 package com.junktion.api.v1.controllers
 
-import com.junktion.api.v1.models.controllers.ImageController
-import com.junktion.api.v1.services.ImageService
+import com.junktion.api.v1.models.image.ImageController
+import com.junktion.api.v1.models.image.ImageService
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-class ImageControllerDefault (
+class ImageControllerImpl (
         private val imageService: ImageService
 ): ImageController {
 

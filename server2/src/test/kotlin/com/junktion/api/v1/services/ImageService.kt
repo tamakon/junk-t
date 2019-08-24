@@ -1,17 +1,17 @@
 package com.junktion.api.v1.services
 
-import com.junktion.api.v1.models.repositories.ImageRepository
+import com.junktion.api.v1.models.image.ImageRepository
 import io.kotlintest.TestCase
 import io.kotlintest.specs.StringSpec
 import io.mockk.mockkClass
 import io.mockk.verify
 
 fun mockImageRepository() = mockkClass(ImageRepository::class, relaxed = true)
-fun instantiate(imageRepository: ImageRepository) = ImageService(imageRepository)
+fun instantiate(imageRepository: ImageRepository) = ImageServiceImpl(imageRepository)
 
-class ImageServiceTest : StringSpec() {
+class ImageServiceImplTest : StringSpec() {
 
-	private lateinit var imageService: ImageService
+	private lateinit var imageService: ImageServiceImpl
 	private lateinit var imageRepository: ImageRepository
 
 	private fun upload() = imageService.upload()

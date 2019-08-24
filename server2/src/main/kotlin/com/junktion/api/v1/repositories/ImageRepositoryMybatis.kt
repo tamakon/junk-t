@@ -1,6 +1,6 @@
 package com.junktion.api.v1.repositories
 
-import com.junktion.api.v1.models.repositories.ImageRepository
+import com.junktion.api.v1.models.image.ImageRepository
 import org.springframework.stereotype.Repository
 
 @Repository

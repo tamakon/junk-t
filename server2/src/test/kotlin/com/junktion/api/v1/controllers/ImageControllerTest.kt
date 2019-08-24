@@ -1,18 +1,18 @@
 package com.junktion.api.v1.controllers
 
-import com.junktion.api.v1.services.ImageService
+import com.junktion.api.v1.services.ImageServiceImpl
 import io.kotlintest.TestCase
 import io.kotlintest.specs.StringSpec
 import io.mockk.mockkClass
 import io.mockk.verify
 
-fun mockImageService() = mockkClass(ImageService::class, relaxed = true)
-fun instantiate(imageService: ImageService) = ImageControllerDefault(imageService)
+fun mockImageService() = mockkClass(ImageServiceImpl::class, relaxed = true)
+fun instantiate(imageService: ImageServiceImpl) = ImageControllerImpl(imageService)
 
-class ImageControllerDefaultTest: StringSpec() {
+class ImageControllerImplTest: StringSpec() {
 
-	private lateinit var imageController: ImageControllerDefault
-	private lateinit var imageService: ImageService
+	private lateinit var imageController: ImageControllerImpl
+	private lateinit var imageService: ImageServiceImpl
 
 	private fun upload() = imageController.upload()
 

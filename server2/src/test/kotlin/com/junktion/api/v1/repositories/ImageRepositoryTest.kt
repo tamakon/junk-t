@@ -1,6 +1,6 @@
 package com.junktion.api.v1.repositories
 
-import com.junktion.api.v1.models.repositories.ImageRepository
+import com.junktion.api.v1.models.image.ImageRepository
 import io.kotlintest.TestCase
 import io.kotlintest.specs.StringSpec
 
