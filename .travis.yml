@@ -1,9 +1,7 @@
 language: java
 jdk:
   - openjdk8
-before_install:
-  - cd server2
 install:
-  - ./gradlew assemble --console=plain
+  - ./gradlew assemble --console=plain --project-dir=server2
 script:
-  - ./gradlew test --console=plain
+  - ./gradlew test --console=plain --project-dir=server2
