@@ -33,7 +33,7 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
 		http.httpBasic().disable()
 		http.authorizeRequests().requestMatchers(rootPath, exampleScreenPath).permitAll()
 		http.authorizeRequests().requestMatchers(authPath).permitAll()
-		http.authorizeRequests().requestMatchers(resourcePath).authenticated()
+		http.authorizeRequests().requestMatchers(resourcePath).permitAll()
 	}
 
 	/**

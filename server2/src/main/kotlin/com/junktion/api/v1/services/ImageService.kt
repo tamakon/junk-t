@@ -1,6 +1,6 @@
 package com.junktion.api.v1.services
 
-import com.junktion.api.v1.repositories.ImageRepository
+import com.junktion.api.v1.models.repositories.ImageRepository
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.stereotype.Service
 

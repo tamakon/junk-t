@@ -28,11 +28,15 @@ fun main(args: Array<String>) {
 @Profile("dev")
 class SwaggerConfig
 
-@Controller
 @RequestMapping("/")
-class HomeController {
+interface HomeController {
 	@GetMapping("example")
-	fun example(): String {
+	fun example(): String
+}
+
+@Controller
+class HomeControllerDefault : HomeController {
+	override fun example(): String {
 		return "example"
 	}
 }

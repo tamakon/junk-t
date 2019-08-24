@@ -1,7 +1,9 @@
 create table images
 (
-    id         serial primary key comment 'システム上のID',
-    tag        varchar(200) not null unique comment '画像を識別するための名前',
-    created_at datetime comment '作成日時',
-    updated_at datetime comment '更新日時'
+    id         int          not null auto_increment comment 'システム上のID',
+    tag        varchar(200) not null comment '画像を識別するための名前',
+    created_at timestamp    not null comment '作成日時',
+    updated_at timestamp    not null comment '更新日時',
+    primary key (id),
+    unique (tag)
 )
