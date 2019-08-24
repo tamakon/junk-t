@@ -2,7 +2,6 @@ package com.junktion.api.v1
 
 import com.junktion.JunktionAdminConfig
 import com.junktion.Oauth2ClientConfig
-import io.kotlintest.TestCase
 import io.kotlintest.extensions.TestListener
 import io.kotlintest.specs.StringSpec
 import io.kotlintest.spring.SpringListener
@@ -44,10 +43,6 @@ class ImageControllerIntegrationTest: StringSpec() {
 					.andDo(print())
 					.andExpect(status().isOk)
 		}
-	}
-
-	override fun beforeTest(testCase: TestCase) {
-
 	}
 
 	private fun obtainAccessToken(): String {

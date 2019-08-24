@@ -24,7 +24,7 @@ class ImageServiceImplTest : StringSpec() {
 	init {
 		"${ImageRepository::register}を実行すること" {
 			upload()
-			verify(exactly = 1) { imageRepository.register() }
+			verify(exactly = 1) { imageRepository.register(any()) }
 		}
 	}
 }

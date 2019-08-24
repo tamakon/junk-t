@@ -41,6 +41,7 @@ dependencies {
 		exclude(module = "junit")
 		exclude(module = "mockito-core")
 	}
+	testImplementation("org.mybatis.spring.boot:mybatis-spring-boot-starter-test:2.1.0")
 	testImplementation("org.springframework.security:spring-security-test")
 	testImplementation("io.kotlintest:kotlintest-runner-junit5:3.3.3")
 	testImplementation("io.kotlintest:kotlintest-extensions-spring:3.3.3")
