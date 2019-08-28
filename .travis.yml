@@ -6,6 +6,7 @@ jobs:
     jdk: openjdk8
     install: ./server2/gradlew assemble --console=plain --project-dir=server2
     script: ./server2/gradlew test integrationTest --console=plain --project-dir=server2
+    after_success: bash <(curl -s https://codecov.io/bash)
 
 stages:
   - name: test
