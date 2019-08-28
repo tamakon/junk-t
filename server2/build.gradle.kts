@@ -57,11 +57,4 @@ tasks.withType<KotlinCompile> {
 	}
 }
 
-tasks.withType<Test> {
-	useJUnitPlatform()
-	onOutput(KotlinClosure2<TestDescriptor, TestOutputEvent, Unit>({ _, outputEvent ->
-		logger.lifecycle(outputEvent.message.trim())
-	}))
-}
-
-apply(from = "integration-test.gradle.kts")
+apply(from = "test.gradle.kts")

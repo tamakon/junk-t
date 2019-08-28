@@ -23,11 +23,26 @@ configurations {
 	}
 }
 
+tasks.withType<Test> {
+	useJUnitPlatform()
+	onOutput(KotlinClosure2<TestDescriptor, TestOutputEvent, Unit>({ _, outputEvent ->
+		logger.lifecycle(outputEvent.message.trim())
+	}))
+}
+
 val integrationTest: SourceSet = the<SourceSetContainer>()["integrationTest"]
 tasks {
 	maybeCreate<Test>("integrationTest").apply {
 		useJUnitPlatform()
 		testClassesDirs = integrationTest.output.classesDirs
 		classpath = integrationTest.runtimeClasspath
+	}
+}
+
+tasks.withType<JacocoReport> {
+	executionData.setFrom(files("${buildDir}/jacoco/test.exec", "${buildDir}/jacoco/integrationTest.exec"))
+	reports {
+		xml.isEnabled = true
+		html.isEnabled = true
 	}
 }
