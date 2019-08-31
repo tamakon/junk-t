@@ -6,7 +6,6 @@ import io.kotlintest.TestCase
 import io.kotlintest.extensions.TestListener
 import io.kotlintest.specs.StringSpec
 import io.kotlintest.spring.SpringListener
-import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.json.JacksonJsonParser
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc

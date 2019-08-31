@@ -1,6 +1,8 @@
+import org.gradle.plugins.ide.idea.model.IdeaModel
+
 configure<SourceSetContainer> {
 	val main by getting
-	maybeCreate("integrationTest").apply {
+	maybeCreate("integration-test").apply {
 		compileClasspath += main.output
 		runtimeClasspath += main.output
 		java {
@@ -30,7 +32,7 @@ tasks.withType<Test> {
 	}))
 }
 
-val integrationTest: SourceSet = the<SourceSetContainer>()["integrationTest"]
+val integrationTest: SourceSet = the<SourceSetContainer>()["integration-test"]
 tasks {
 	maybeCreate<Test>("integrationTest").apply {
 		useJUnitPlatform()
@@ -45,4 +47,11 @@ tasks.withType<JacocoReport> {
 		xml.isEnabled = true
 		html.isEnabled = true
 	}
+}
+
+val idea = the<IdeaModel>()
+idea.module {
+	testSourceDirs = testSourceDirs +
+			integrationTest.java.srcDirs +
+			integrationTest.resources.srcDirs
 }
