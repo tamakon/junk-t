@@ -11,12 +11,14 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic
 import org.springframework.test.web.servlet.MockMvc
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers.print
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import org.springframework.util.LinkedMultiValueMap
+import org.springframework.mock.web.MockMultipartFile
+
+
 
 
 @SpringBootTest
@@ -30,18 +32,33 @@ class ImageControllerIntegrationTest: StringSpec() {
 	@Autowired private lateinit var junktionAdminConfig: JunktionAdminConfig
 
 	init {
-		"通常アクセスで404になること" {
-			mockMvc.perform(get("/api/v1/images/upload"))
+		"通常アクセスで401になること" {
+			val requestWithoutAccessToken = multipart("/api/v1/images/upload2")
+					.file(MockMultipartFile("upload_file", "filename.png", "image/png", "test data".toByteArray()))
+					.param("tag", "some_tag")
+			mockMvc.perform(requestWithoutAccessToken)
 					.andDo(print())
 					.andExpect(status().isUnauthorized)
 		}
 		"認証後アクセスで200になること" {
 			val accessToken = obtainAccessToken()
-			val gettingWithAccessToken = get("/api/v1/images/upload")
+			MockMultipartFile("multipartFile", "filename.png", "image/png", "test data".toByteArray())
+			val request = multipart("/api/v1/images/upload2")
+					.file("upload_file", "test data".toByteArray())
+					.param("tag", "some_tag")
 					.header("Authorization", "Bearer $accessToken")
-			mockMvc.perform(gettingWithAccessToken)
+			mockMvc.perform(request)
 					.andDo(print())
 					.andExpect(status().isOk)
+		}
+		"バリデーションエラーで400になること" {
+			val accessToken = obtainAccessToken()
+			val gettingWithAccessToken = multipart("/api/v1/images/upload2")
+					.header("Authorization", "Bearer $accessToken")
+					.param("tag", "some_tag")
+			mockMvc.perform(gettingWithAccessToken)
+					.andDo(print())
+					.andExpect(status().isBadRequest)
 		}
 	}
 
