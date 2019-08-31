@@ -9,16 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.json.JacksonJsonParser
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.mock.web.MockMultipartFile
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic
 import org.springframework.test.web.servlet.MockMvc
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers.print
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import org.springframework.util.LinkedMultiValueMap
-import org.springframework.mock.web.MockMultipartFile
-
-
 
 
 @SpringBootTest
@@ -33,7 +32,7 @@ class ImageControllerIntegrationTest: StringSpec() {
 
 	init {
 		"通常アクセスで401になること" {
-			val requestWithoutAccessToken = multipart("/api/v1/images/upload2")
+			val requestWithoutAccessToken = multipart("/api/v1/images/upload")
 					.file(MockMultipartFile("upload_file", "filename.png", "image/png", "test data".toByteArray()))
 					.param("tag", "some_tag")
 			mockMvc.perform(requestWithoutAccessToken)
@@ -42,8 +41,7 @@ class ImageControllerIntegrationTest: StringSpec() {
 		}
 		"認証後アクセスで200になること" {
 			val accessToken = obtainAccessToken()
-			MockMultipartFile("multipartFile", "filename.png", "image/png", "test data".toByteArray())
-			val request = multipart("/api/v1/images/upload2")
+			val request = multipart("/api/v1/images/upload")
 					.file("upload_file", "test data".toByteArray())
 					.param("tag", "some_tag")
 					.header("Authorization", "Bearer $accessToken")
@@ -51,12 +49,22 @@ class ImageControllerIntegrationTest: StringSpec() {
 					.andDo(print())
 					.andExpect(status().isOk)
 		}
-		"バリデーションエラーで400になること" {
+		"必須要素エラーで400になること(バリデーションではなく必須が前提)" {
 			val accessToken = obtainAccessToken()
-			val gettingWithAccessToken = multipart("/api/v1/images/upload2")
+			val gettingWithAccessToken = multipart("/api/v1/images/upload")
 					.header("Authorization", "Bearer $accessToken")
 					.param("tag", "some_tag")
 			mockMvc.perform(gettingWithAccessToken)
+					.andDo(print())
+					.andExpect(status().isBadRequest)
+		}
+		"バリデーション_tagが空文字の場合" {
+			val accessToken = obtainAccessToken()
+			val request = multipart("/api/v1/images/upload")
+					.file("upload_file", "test data".toByteArray())
+					.param("tag", "")
+					.header("Authorization", "Bearer $accessToken")
+			mockMvc.perform(request)
 					.andDo(print())
 					.andExpect(status().isBadRequest)
 		}
