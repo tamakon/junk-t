@@ -9,3 +9,10 @@ install:
   - ./server2/gradlew assemble --console=plain --project-dir=server2
 script:
   - ./server2/gradlew test --console=plain --project-dir=server2
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
