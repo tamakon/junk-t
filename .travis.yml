@@ -3,7 +3,7 @@ jobs:
   include:
   - stage: test
     name: "server side test"
-    if: branch =~ /^(master|server\/.+)$/ OR head_branch =~ /^server\/.+$/
+    if: branch =~ /^(master|server\/.+)$/ OR head_branch =~ /^(server\/.+|create-image-api)$/
     language: java
     jdk: openjdk8
     install: ./server2/gradlew assemble --console=plain --project-dir=server2
