@@ -1,3 +1,4 @@
+import org.gradle.jvm.tasks.Jar
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -9,7 +10,6 @@ plugins {
 	idea
 }
 
-group = "com"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 
@@ -57,6 +57,10 @@ tasks.withType<KotlinCompile> {
 		freeCompilerArgs = listOf("-Xjsr305=strict")
 		jvmTarget = java.sourceCompatibility.toString()
 	}
+}
+
+tasks.withType<Jar> {
+	enabled = true
 }
 
 apply(from = "test.gradle.kts")
