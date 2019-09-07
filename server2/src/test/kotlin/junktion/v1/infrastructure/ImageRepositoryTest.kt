@@ -1,16 +1,16 @@
 package junktion.v1.infrastructure
 
-import junktion.v1.core.Image
-import junktion.v1.api.ImageRepository
-import junktion.v1.mybatis.ImageMapper
 import io.kotlintest.TestCase
 import io.kotlintest.specs.StringSpec
 import io.mockk.mockkClass
+import junktion.v1.api.ImageRepository
+import junktion.v1.core.Image
+import junktion.v1.mybatis.ImageMapper
 import java.time.LocalDateTime
 
 fun mockImageMapper() = mockkClass(ImageMapper::class, relaxed = true)
 
-class ImageRepositoryMyBatisTest : StringSpec() {
+class ImageRepositoryImplTest : StringSpec() {
 
 	private lateinit var imageRepository: ImageRepository
 

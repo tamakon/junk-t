@@ -1,11 +1,12 @@
 package junktion.v1.service
 
-import junktion.v1.api.ImageFileStorage
-import junktion.v1.api.ImageRepository
 import io.kotlintest.TestCase
 import io.kotlintest.specs.StringSpec
 import io.mockk.mockkClass
 import io.mockk.verify
+import junktion.v1.api.ImageFileStorage
+import junktion.v1.api.ImageRepository
+import utils.TEST_IMAGE_FILE
 
 fun mockImageRepository() = mockkClass(ImageRepository::class, relaxed = true)
 fun mockImageFileStorage() = mockkClass(ImageFileStorage::class, relaxed = true)
@@ -30,6 +31,12 @@ class ImageServiceImplTest : StringSpec() {
 		"${ImageRepository::register}を実行すること" {
 			upload()
 			verify(exactly = 1) { imageRepository.register(any()) }
+		}
+
+		"${ImageRepository::register}と${ImageFileStorage::save}を実行すること" {
+			imageService.upload(TEST_IMAGE_FILE, "tag")
+			verify(exactly = 1) { imageRepository.register(any()) }
+			verify(exactly = 1) { imageFileStorage.save(TEST_IMAGE_FILE, "tag") }
 		}
 	}
 }
