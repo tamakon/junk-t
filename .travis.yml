@@ -6,6 +6,9 @@ jobs:
     if: branch =~ /^(master|server\/.+)$/ OR head_branch =~ /^(server\/.+|create-image-api)$/
     language: java
     jdk: openjdk8
+    env:
+      global:
+        - SPRING_PROFILES_ACTIVE=test
     install: ./server2/gradlew assemble --console=plain --project-dir=server2
     script: ./server2/gradlew test integrationTest jacocoTestReport --console=plain --project-dir=server2
     after_success: bash <(curl -s https://codecov.io/bash)

@@ -28,7 +28,7 @@ configurations {
 tasks.withType<Test> {
 	useJUnitPlatform()
 	onOutput(KotlinClosure2<TestDescriptor, TestOutputEvent, Unit>({ _, outputEvent ->
-		logger.lifecycle(outputEvent.message.trim())
+		logger.lifecycle(outputEvent.message.replace(Regex("\n$"), ""))
 	}))
 }
 
