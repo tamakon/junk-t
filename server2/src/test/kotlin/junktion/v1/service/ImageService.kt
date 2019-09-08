@@ -19,8 +19,6 @@ class ImageServiceImplTest : StringSpec() {
 	private lateinit var imageFileStorage: ImageFileStorage
 	private lateinit var imageRepository: ImageRepository
 
-	private fun upload() = imageService.upload()
-
 	override fun beforeTest(testCase: TestCase) {
 		imageRepository = mockImageRepository()
 		imageFileStorage = mockImageFileStorage()
@@ -28,11 +26,6 @@ class ImageServiceImplTest : StringSpec() {
 	}
 
 	init {
-		"${ImageRepository::register}を実行すること" {
-			upload()
-			verify(exactly = 1) { imageRepository.register(any()) }
-		}
-
 		"${ImageRepository::register}と${ImageFileStorage::save}を実行すること" {
 			imageService.upload(TEST_IMAGE_FILE, "tag")
 			verify(exactly = 1) { imageRepository.register(any()) }

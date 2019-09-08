@@ -22,5 +22,5 @@ interface ImageController {
 			multipartFile: MultipartFile,
 			@RequestParam("tag")
 			@NotEmpty
-			tag: String): String
+			tag: String)
 }
