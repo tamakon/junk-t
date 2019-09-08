@@ -1,6 +1,8 @@
 package junktion.v1.infrastructure
 
 import junktion.v1.api.ImageFileStorage
+import org.apache.tomcat.util.http.fileupload.FileUtils
+import org.springframework.boot.autoconfigure.web.ResourceProperties
 import org.springframework.context.annotation.Profile
 import org.springframework.core.io.ClassPathResource
 import org.springframework.stereotype.Component
@@ -29,13 +31,17 @@ interface ImagesDirectoryProvider {
 @Profile("dev", "test")
 class LocalImagesDirectoryProvider: ImagesDirectoryProvider {
 
+	/**
+	 * Springで静的リソースとして自動認識されるクラスパスを使用しています。
+	 * @see  ResourceProperties
+	 */
+	private val staticContentPath = "static"
+
 	private val directory: File = run {
 		val resource = ClassPathResource("")
 		val resourceDirectory = File(resource.uri)
-		val imagesDirectory = resourceDirectory.resolve("images")
-		if (!imagesDirectory.exists()) {
-			imagesDirectory.mkdir()
-		}
+		val imagesDirectory = resourceDirectory.resolve("$staticContentPath/images")
+		FileUtils.forceMkdir(imagesDirectory)
 		imagesDirectory
 	}
 

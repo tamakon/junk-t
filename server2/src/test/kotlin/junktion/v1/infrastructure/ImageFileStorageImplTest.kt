@@ -31,6 +31,6 @@ internal class ImageFileStorageImplTest {
     @DisplayName("対象のディレクトリにファイルが保存されること")
     fun save() {
         imageFileStorage.save(TEST_IMAGE_FILE, "tag")
-        assertThat(File(ClassPathResource("images/tag.png").uri).exists()).isTrue()
+        assertThat(File(ClassPathResource("static/images/tag.png").uri).exists()).isTrue()
     }
 }
