@@ -16,7 +16,7 @@ class ImageControllerImpl (
 ): ImageController {
 
     override fun upload(multipartFile: MultipartFile, tag: String) {
-        val file = File(multipartFile.resource.uri)
+        val file = multipartFile.resource.file
         imageService.upload(file, tag)
     }
 
