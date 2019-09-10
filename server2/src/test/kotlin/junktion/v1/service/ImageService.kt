@@ -6,7 +6,7 @@ import io.mockk.mockkClass
 import io.mockk.verify
 import junktion.v1.api.ImageFileStorage
 import junktion.v1.api.ImageRepository
-import utils.TEST_IMAGE_FILE
+import junktion.v1.core.Image
 
 fun mockImageRepository() = mockkClass(ImageRepository::class, relaxed = true)
 fun mockImageFileStorage() = mockkClass(ImageFileStorage::class, relaxed = true)
@@ -27,9 +27,10 @@ class ImageServiceImplTest : StringSpec() {
 
 	init {
 		"${ImageRepository::register}と${ImageFileStorage::save}を実行すること" {
-			imageService.upload(TEST_IMAGE_FILE, "tag")
-			verify(exactly = 1) { imageRepository.register(any()) }
-			verify(exactly = 1) { imageFileStorage.save(TEST_IMAGE_FILE, "tag") }
+			val image = Image("test.png", ByteArray(0))
+			imageService.upload(image)
+			verify(exactly = 1) { imageRepository.register(image) }
+			verify(exactly = 1) { imageFileStorage.save(image) }
 		}
 	}
 }

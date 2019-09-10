@@ -35,6 +35,7 @@ dependencies {
 	implementation("io.springfox:springfox-swagger2:2.9.2")
 	implementation("org.springframework.security.oauth:spring-security-oauth2:2.3.6.RELEASE")
 	implementation("org.flywaydb:flyway-core")
+	implementation("commons-io:commons-io:2.6")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("mysql:mysql-connector-java")
 	runtimeOnly("com.h2database:h2")

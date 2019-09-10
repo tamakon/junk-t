@@ -1,6 +1,7 @@
 package junktion.v1.infrastructure
 
 import junktion.v1.api.ImageFileStorage
+import junktion.v1.core.Image
 import org.apache.tomcat.util.http.fileupload.FileUtils
 import org.springframework.boot.autoconfigure.web.ResourceProperties
 import org.springframework.context.annotation.Profile
@@ -15,11 +16,10 @@ import java.io.File
 class ImageFileStorageImpl(
 		private val imagesDirectoryProvider: ImagesDirectoryProvider
 ): ImageFileStorage {
-
-	override fun save(sourceFile: File, tag: String) {
+	override fun save(image: Image) {
 		val imagesDirectory = imagesDirectoryProvider.provide()
-		val destinationFile = imagesDirectory.resolve("$tag.${sourceFile.extension}")
-		FileCopyUtils.copy(sourceFile, destinationFile)
+		val destinationFile = imagesDirectory.resolve(image.name)
+		FileCopyUtils.copy(image.content, destinationFile)
 	}
 }
 

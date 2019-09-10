@@ -1,5 +1,6 @@
 package junktion.v1.infrastructure
 
+import junktion.v1.core.Image
 import org.apache.tomcat.util.http.fileupload.FileUtils
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterEach
@@ -7,7 +8,6 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.springframework.core.io.ClassPathResource
-import utils.TEST_IMAGE_FILE
 import java.io.File
 
 internal class ImageFileStorageImplTest {
@@ -30,7 +30,8 @@ internal class ImageFileStorageImplTest {
     @Test
     @DisplayName("対象のディレクトリにファイルが保存されること")
     fun save() {
-        imageFileStorage.save(TEST_IMAGE_FILE, "tag")
-        assertThat(File(ClassPathResource("static/images/tag.png").uri).exists()).isTrue()
+        val image = Image("test.png", ByteArray(0))
+        imageFileStorage.save(image)
+        assertThat(File(ClassPathResource("static/images/test.png").uri).exists()).isTrue()
     }
 }

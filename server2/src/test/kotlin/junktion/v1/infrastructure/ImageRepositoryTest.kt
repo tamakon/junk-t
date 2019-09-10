@@ -6,7 +6,6 @@ import io.mockk.mockkClass
 import junktion.v1.api.ImageRepository
 import junktion.v1.core.Image
 import junktion.v1.mybatis.ImageMapper
-import java.time.LocalDateTime
 
 fun mockImageMapper() = mockkClass(ImageMapper::class, relaxed = true)
 
@@ -20,7 +19,7 @@ class ImageRepositoryImplTest : StringSpec() {
 
 	init {
 		"問題なく実行されること" {
-			val image = Image("tag", LocalDateTime.now(), LocalDateTime.now())
+			val image = Image("tag", ByteArray(0))
 			imageRepository.register(image)
 		}
 	}

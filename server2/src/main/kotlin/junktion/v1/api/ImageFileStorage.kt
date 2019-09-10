@@ -1,7 +1,7 @@
 package junktion.v1.api
 
-import java.io.File
+import junktion.v1.core.Image
 
 interface ImageFileStorage {
-	fun save(sourceFile: File, tag: String)
+	fun save(image: Image)
 }

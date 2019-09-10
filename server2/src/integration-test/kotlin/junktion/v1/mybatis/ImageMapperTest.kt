@@ -1,6 +1,5 @@
 package junktion.v1.mybatis
 
-import junktion.v1.core.Image
 import io.kotlintest.extensions.TestListener
 import io.kotlintest.specs.StringSpec
 import io.kotlintest.spring.SpringListener
@@ -19,13 +18,15 @@ class ImageMapperTest: StringSpec() {
 	private lateinit var mapper: ImageMapper
 
 	init {
-		"テスト" {
-			val image = Image("tag", LocalDateTime.now(), LocalDateTime.now())
+		"insert処理が正しく行われること" {
+			val now = LocalDateTime.now()
+			val image = ImageRecord("tag", now, now)
 			mapper.save(image)
 			val list = mapper.selectAll()
 			assertThat(list).isNotEmpty
-			assertThat(list[0].tag).isEqualTo("tag")
+			assertThat(list[0].name).isEqualTo("tag")
 			assertThat(list[0].createdAt).isNotNull()
+			assertThat(list[0].updatedAt).isNotNull()
 		}
 	}
 }

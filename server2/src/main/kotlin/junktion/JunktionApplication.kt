@@ -32,16 +32,12 @@ fun main(args: Array<String>) {
 class SwaggerConfig
 
 @RequestMapping("/")
-interface HomeController {
-	@GetMapping("example")
-	fun example(): String
-}
-
 @Controller
-class HomeControllerDefault : HomeController {
-	override fun example(): String {
-		return "example"
-	}
+class ExampleController {
+	@GetMapping("example")
+	fun example() = "example"
+	@GetMapping("upload_image_example")
+	fun uploadImageExample() = "upload_image_example"
 }
 
 @Api(description = "ああああ")
