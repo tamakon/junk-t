@@ -1,6 +1,7 @@
 package junktion.v1.infrastructure
 
 import junktion.v1.api.ImageFileStorage
+import junktion.v1.api.InfrastructureException
 import junktion.v1.core.Image
 import org.apache.tomcat.util.http.fileupload.FileUtils
 import org.springframework.boot.autoconfigure.web.ResourceProperties
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Component
 import org.springframework.stereotype.Repository
 import org.springframework.util.FileCopyUtils
 import java.io.File
+import java.io.IOException
 
 
 @Repository
@@ -19,7 +21,11 @@ class ImageFileStorageImpl(
 	override fun save(image: Image) {
 		val imagesDirectory = imagesDirectoryProvider.provide()
 		val destinationFile = imagesDirectory.resolve(image.name)
-		FileCopyUtils.copy(image.content, destinationFile)
+		try {
+			FileCopyUtils.copy(image.content, destinationFile)
+		} catch (e: IOException) {
+			throw InfrastructureException(e)
+		}
 	}
 }
 

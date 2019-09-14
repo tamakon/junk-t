@@ -49,6 +49,7 @@ dependencies {
 	testImplementation("io.kotlintest:kotlintest-runner-junit5:3.3.3")
 	testImplementation("io.kotlintest:kotlintest-extensions-spring:3.3.3")
 	testImplementation("com.ninja-squad:springmockk:1.1.2")
+	testImplementation("org.assertj:assertj-db:1.2.0")
 	testImplementation("org.junit.jupiter:junit-jupiter-api")
 	testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
 }

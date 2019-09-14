@@ -2,6 +2,7 @@ package junktion.v1.presentation
 
 import junktion.v1.api.ImageController
 import junktion.v1.api.ImageService
+import junktion.v1.api.InfrastructureException
 import junktion.v1.core.Image
 import org.apache.commons.io.FilenameUtils
 import org.springframework.http.HttpStatus
@@ -32,5 +33,11 @@ class ImageControllerImpl (
     @ExceptionHandler(ConstraintViolationException::class)
     fun handleException(): String {
         return "バリデーションエラーです"
+    }
+
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(InfrastructureException::class)
+    fun handleServerException(): String {
+        return "DB処理でのエラーです"
     }
 }
