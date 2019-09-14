@@ -22,6 +22,9 @@ class JunktionApplicationTest {
 	}
 }
 
+/**
+ * テストカバレッジ確保のためだけにやってます。
+ */
 @SpringBootTest
 @AutoConfigureMockMvc
 class ExampleControllerIntegrationTest: StringSpec() {
