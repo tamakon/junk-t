@@ -8,8 +8,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
-<h1>API用ログイン画面</h1>
+<h1>画像アップロードの使用例</h1>
 <div style="margin: 20px">
+    <h4>認証</h4>
     <div>
         <label for="username">ユーザ名</label><input id="username" name="username" type="text" />
     </div>
@@ -22,8 +23,15 @@
     <div id="login-result"></div>
 </div>
 <div style="margin: 20px">
+    <h4>アップロード</h4>
     <div>
         <label for="access_token">アクセストークン</label><input id="access_token" name="text"/>
+    </div>
+    <div>
+        <label for="upload_file_input">画像ファイル</label><input id="upload_file_input" type="file">
+    </div>
+    <div>
+        <label for="tag_input">タグ名</label><input id="tag_input" type="text">
     </div>
     <div>
         <button onclick="apiRequest()">API</button>
@@ -46,12 +54,18 @@
 	}
 	function apiRequest() {
 		var accessToken = $("#access_token").val();
+		var data = new FormData();
+		data.append("upload_file", $('#upload_file_input')[0].files[0]);
+		data.append("tag", $("#tag_input").val());
 		$.ajax({
-			url: "http://localhost:8080/api/v1/aaa",
-			type: "get",
+			url: "http://localhost:8080/api/v1/images/upload",
+			type: "post",
 			headers: {
-				Authorization: "Bearer " + accessToken
-			}
+				Authorization: "Bearer " + accessToken,
+			},
+			contentType: false,
+			processData: false,
+			data: data
 		}).then(function (result) {
 			$("#api_result").text(JSON.stringify(result));
 		}).catch(function (reason) {

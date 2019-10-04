@@ -1,6 +1,7 @@
-package com.junktion
+package junktion
 
 import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration
+import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.authentication.AuthenticationManager
@@ -12,11 +13,14 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher
+import org.springframework.stereotype.Component
 import springfox.documentation.swagger2.web.Swagger2Controller
 
 @Configuration
 @EnableWebSecurity
-class SecurityConfig : WebSecurityConfigurerAdapter() {
+class SecurityConfig(
+		private val junktionAdminConfig: JunktionAdminConfig
+) : WebSecurityConfigurerAdapter() {
 
 	/** 使用例ページのパス */
 	private val exampleScreenPath = AntPathRequestMatcher("/example")
@@ -33,7 +37,7 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
 		http.httpBasic().disable()
 		http.authorizeRequests().requestMatchers(rootPath, exampleScreenPath).permitAll()
 		http.authorizeRequests().requestMatchers(authPath).permitAll()
-		http.authorizeRequests().requestMatchers(resourcePath).authenticated()
+		http.authorizeRequests().requestMatchers(resourcePath).permitAll()
 	}
 
 	/**
@@ -41,7 +45,9 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
 	 */
 	override fun configure(auth: AuthenticationManagerBuilder) {
 		val inMemoryAuthentication = auth.inMemoryAuthentication()
-		inMemoryAuthentication.withUser("user1").password("{noop}user1Pass").roles("USER")
+		inMemoryAuthentication.withUser(junktionAdminConfig.userId)
+				.password("{noop}${junktionAdminConfig.password}")
+				.roles("USER")
 	}
 
 	/**
@@ -63,8 +69,8 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
 	 * [AuthorizationServerConfig]で使用するため公開します。
 	 */
 	@Bean
-	override fun authenticationManager(): AuthenticationManager {
-		return super.authenticationManager()
+	override fun authenticationManagerBean(): AuthenticationManager {
+		return super.authenticationManagerBean()
 	}
 
 	/**
@@ -75,4 +81,11 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
 	override fun userDetailsServiceBean(): UserDetailsService {
 		return super.userDetailsServiceBean()
 	}
+}
+
+@Component
+@ConfigurationProperties(prefix = "junk-t.admin")
+class JunktionAdminConfig {
+	lateinit var userId: String
+	lateinit var password: String
 }
